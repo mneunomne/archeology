@@ -6,12 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon run server.js",
-    "watch": "nodemon run server.js"
+    "watch": "nodemon run server.js",
+    "stream": "nodemon run stream.js"
   },
   "author": "alberto harres",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.3",
+    "node-rtsp-stream": "^0.0.9",
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
