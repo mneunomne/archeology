@@ -1,4 +1,4 @@
-const socket = io.connect();
+const socket = io.connect('http://localhost:3000');
 
 let video;
 
@@ -8,8 +8,8 @@ let camHeight
 let outputHeight
 let outputWidth
 
-let captureWidth = 1280
-let captureHeight = 960
+let captureWidth = 1280/2
+let captureHeight = 720/2
 
 const canvasSize = 500;
 
@@ -21,13 +21,12 @@ const DELAY = 5000
 function setup() {
   canvas_w = window.innerWidth;
    // calculate canvas height
-  canvas_h = (canvas_w * 9) / 16;
+  canvas_h = window.innerHeight
    // create canvas
   createCanvas(canvas_w, canvas_h);
   // createCanvas(1200, 800);
   strokeWeight(5);
   colorMode(HSB, 255, 255, 255, 255)
-  
   //initCapture()
 }
 
@@ -51,7 +50,8 @@ function draw () {
   background(255, 0, 0)
   noFill()
   stroke(0, 255, 255)
-  rect(width/2 - outputWidth/2, 0, outputWidth, canvas_h)
+  translate(width/2 - captureWidth/2, height/2 - captureWidth/2)
+  rect(0, 0, captureWidth, captureHeight)
   if (lastDetections.length > 0) {
     drawDetections(lastDetections)
   }
@@ -83,13 +83,20 @@ function drawDetections (detections) {
 }
 
 function drawChar (detection) {
-  let x = detection.x * camWidth + (width/2 - camWidth/2)
-  let y = detection.y * camHeight
-  let w = detection.w * camWidth
-  let h = detection.h * camHeight
+  let x = detection.x * captureWidth
+  let y = detection.y * captureHeight
+  let w = detection.w * captureWidth
+  let h = detection.h * captureHeight
   console.log("detection", detection)
   // console.log(x, y, w, h)
-  //let char = detection.char
+  let char = detection.char
+  var fontSize = h 
+  strokeWeight(1);
+  fill(color('white'))
+  stroke(color('white'))
+  textSize(fontSize)
+  text(char, x, y, w, h)
+  
   noFill();
   strokeWeight(2)
   stroke(detection.id, 255, 255, 255)

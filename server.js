@@ -29,6 +29,10 @@ io.on('connection', (socket) => {
       })
     )
   })
+  socket.on("textSound", textSound => {
+    // console.log("textSound", textSound)
+    socket.broadcast.emit("textSound", textSound)
+  })
 });
 
 // setting the server to run on port 3000
