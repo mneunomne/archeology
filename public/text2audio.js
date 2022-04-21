@@ -5,7 +5,7 @@ const source = document.createElement('source');
 source.setAttribute("type", "audio/wav")
 audio.append(source)
 
-const default_sample_rate = 4000
+const default_sample_rate = 8000
 const default_bits = "8"
 
 const text2Audio = function (text, loop) {
@@ -22,6 +22,7 @@ const text2Audio = function (text, loop) {
   console.log("wavDataURI", wavDataURI)
   source.src = wavDataURI;
   audio.load();
-  audio.loop = loop;
+  audio.loop = false;
+  audio.playbackRate = 0.1
   audio.play();
 }
