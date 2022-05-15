@@ -22,7 +22,7 @@ const text2Audio = function (text, loop) {
   console.log("wavDataURI", wavDataURI)
   source.src = wavDataURI;
   audio.load();
-  audio.loop = false;
+  audio.loop = true;
   audio.playbackRate = 0.1
   audio.play();
 }
